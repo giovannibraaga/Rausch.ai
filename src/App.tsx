@@ -1,3 +1,9 @@
+import { ThemeProvider } from "./components/theme-provider";
+
 export function App() {
-  return <h1>Hello World</h1>;
+  return (
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      {children}
+    </ThemeProvider>
+  );
 }
