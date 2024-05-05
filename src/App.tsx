@@ -1,10 +1,18 @@
 import { ModeToggle } from "./components/mode-toggle";
 import { ThemeProvider } from "./components/theme-provider";
 import { Button } from "./components/ui/button";
-import { Github, FileVideo, Upload } from "lucide-react";
+import { Github, FileVideo, Upload, Wand2 } from "lucide-react";
 import { Textarea } from "./components/ui/textarea";
 import { Separator } from "./components/ui/separator";
 import { Label } from "./components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./components/ui/select";
+import { Slider } from "./components/ui/slider";
 
 export function App() {
   return (
@@ -55,6 +63,7 @@ export function App() {
 
         <aside className="w-80 space-y-6">
           <form className="space-y-6">
+            {/* Video upload section */}
             <label
               htmlFor="video"
               className="p-14 text-muted-foreground text-sm flex flex-col items-center justify-center gap-2 border border-dashed rounded-md aspect-video cursor-pointer hover:bg-primary/20"
@@ -62,29 +71,84 @@ export function App() {
               Select a video
               <FileVideo className="w-4 h-4" />
             </label>
-
             <input
               type="file"
               id="video"
               accept="video/mp4"
               className="sr-only"
             />
-
             <Separator />
-
-            <div className="space-y-1">
+            {/* Transcription prompt section */}
+            <div className="space-y-2">
               <Label htmlFor="transcription_prompt">Transcription prompt</Label>
               <Textarea
                 id="transcription_prompt"
-                className="min-h-20 leading-relaxed"
+                className="h-20 leading-relaxed resize-none"
                 placeholder="Include key words that are mentioned in the video, separeted by commas ( , )"
               />
 
               <Button type="submit" className="w-full">
-                Upload Video 
-                <Upload className="w-4 h-4 ml-2"/>
+                Upload Video
+                <Upload className="w-4 h-4 ml-2" />
               </Button>
             </div>
+          </form>
+
+          <Separator />
+
+          <form className="space-y-6">
+            {/* Prompt selection */}
+            <div className="space-y-2">
+              <Label>Prompt</Label>
+
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a prompt..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="title">Youtube title</SelectItem>
+                  <SelectItem value="description">
+                    Youtube description
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            {/* Model selection */}
+            <div className="space-y-2">
+              <Label>Model</Label>
+
+              <Select defaultValue="gpt3.5">
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="gpt3.5">GPT 3.5-turbo 16k</SelectItem>
+                  <SelectItem value="gpt4.0">GPT 4.0-turbo 128k </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <Separator />
+
+            {/*Temperature section */}
+            <div className="space-y-2">
+              <Label>Temperature</Label>
+
+              <Slider min={0} max={1} step={0.1} />
+
+              <span className="block text-xs text-muted-foreground italic leading-relaxed">
+                Higher values tends to make the result more creative and less
+                precise.
+              </span>
+            </div>
+
+            <Separator />
+
+            {/* Execute Button */}
+            <Button type="submit" className="w-full">
+              Execute
+              <Wand2 className="w-4 h-4 ml-2" />
+            </Button>
           </form>
         </aside>
       </main>
