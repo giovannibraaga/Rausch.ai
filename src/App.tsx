@@ -19,7 +19,7 @@ export function App() {
     <div className="min-h-screen flex flex-col">
       <div className="px-6 py-3 flex items-center justify-between border-b">
         <img
-          src="/public/logo.png"
+          src="/rauschai-logo.png"
           alt="Rausch.ai Icon"
           width={50}
           height={50}
