@@ -49,7 +49,7 @@ export function VideoInputForm() {
         ) : (
           <>
             <FileVideo className="w-4 h-4" />
-            Select a video{" "}
+            Select a video
           </>
         )}
       </label>
