@@ -11,10 +11,10 @@ import { api } from "@/lib/axios";
 type Status = 'waiting' | 'converting' | 'uploading' | 'generating' | 'success'
 
 const statusMessages = {
-  converting: 'Convertendo...',
-  generating: 'Transcrevendo...',
-  uploading: 'Carregando...',
-  success: 'Sucesso!',
+  converting: 'Converting...',
+  generating: 'Transcribing...',
+  uploading: 'Loading...',
+  success: 'Success!',
 }
 
 interface VideoInputFormProps {
@@ -97,13 +97,13 @@ export function VideoInputForm(props: VideoInputFormProps) {
 
     setStatus('uploading')
 
-    const response = await api.post('/videos', data)
+    const response = await api.post('https://rausch-ai-api.onrender.com/videos', data)
 
     const videoId = response.data.video.id
 
     setStatus('generating')
 
-    await api.post(`/videos/${videoId}/transcription`, {
+    await api.post(`https://rausch-ai-api.onrender.com/videos/${videoId}/transcription`, {
       prompt,
     })
 
@@ -131,7 +131,7 @@ export function VideoInputForm(props: VideoInputFormProps) {
         ) : (
           <>
             <FileVideo className="w-4 h-4" />
-            Selecione um vídeo
+            Select a video.
           </>
         )}
       </label>
