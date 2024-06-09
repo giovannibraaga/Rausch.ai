@@ -87,7 +87,6 @@ export function VideoInputForm(props: VideoInputFormProps) {
       return
     }
 
-    // converter o video em áudio
     setStatus('converting')
 
     const audioFile = await convertVideoToAudio(videoFile)
@@ -148,7 +147,7 @@ export function VideoInputForm(props: VideoInputFormProps) {
           disabled={status !== 'waiting'}
           id="transcription_prompt"
           className="h-20 leading-relaxed resize-none"
-          placeholder="Inclua palavras-chave mencionadas no vídeo separadas por vírgula (,)"
+          placeholder="Include keywords mentioned in the video separated by commas (,)"
         />
       </div>
 
@@ -160,7 +159,7 @@ export function VideoInputForm(props: VideoInputFormProps) {
       >
         {status === 'waiting'? (
           <>
-            Carregar video
+            Upload Video
             <Upload className="w-4 h-4 ml-2" />
           </>
         ) : statusMessages[status]}
